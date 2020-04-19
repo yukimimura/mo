@@ -1,0 +1,6 @@
+<%= @post.content %> 　<!-- 修正必要　-->
+
+
+<% if current_user == @post.user %>
+  <%= link_to "Delete", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+<% end %>

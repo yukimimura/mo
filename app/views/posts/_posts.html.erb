@@ -1,0 +1,9 @@
+<% posts.each do |post| %>
+  <p><%= post.title %></p>
+  <p><%= post.image %></p>
+  <p><%= post.review %></p>
+  <p><%= post.content %></p>
+  <%= link_to '詳細', post_path(post) %>
+<% end %>
+
+<%= paginate posts %>

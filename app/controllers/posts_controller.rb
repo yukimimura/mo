@@ -13,17 +13,33 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:success] = 'メッセージを投稿しました。'
+      flash[:success] = '映画を投稿しました。'
       redirect_to root_url
     else
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = '映画の投稿に失敗しました。'
       render 'posts/new'
     end
   end
   
+  def edit
+    @post = current_user.posts.find(params[:id])
+  end
+  
+  def update
+    @post = current_user.posts.find(params[:id])
+
+    if @post.update(post_params)
+      flash[:success] = '映画は正常に更新されました'
+      redirect_to @post
+    else
+      flash.now[:danger] = '映画は更新されませんでした'
+      render :edit
+    end
+  end
+
   def destroy
     @post.destroy
-    flash[:success] = 'メッセージを削除しました。'
+    flash[:success] = '映画を削除しました。'
     redirect_to root_url
   end
   

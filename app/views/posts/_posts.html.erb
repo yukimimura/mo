@@ -1,9 +1,17 @@
-<% posts.each do |post| %>
-  <p><%= post.title %></p>
-  <p><%= image_tag post.image.url if post.image? %></p>
-  <p><%= post.review %></p>
-  <p><%= post.content %></p>
-  <%= link_to '詳細', post_path(post) %>
-<% end %>
-
-<%= paginate posts %>
+<ul class="list-unstyled">
+  <% posts.each do |post| %>
+    <li class="media mb-5 ">
+      <img class="mr-4 rounded" width="200" height="200" src="<%= post.image.url if post.image? %>" alt="">
+      <div class="media-body">
+        <h5 class="mt-0"><%= post.title %></h5>
+        <p>☆<%= post.review %></p>
+        <div id="post">
+          <p><%= post.content %></p>
+        </div>
+        <p><%= post.updated_at %></p>
+        <p><%= link_to '詳しく見る >', post_path(post) %></p>
+      </div>
+    </list>
+  <% end %>
+  <%= paginate posts %>
+</ul>

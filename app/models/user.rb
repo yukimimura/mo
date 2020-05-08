@@ -29,4 +29,20 @@ class User < ApplicationRecord
   def feed_posts
     Post.where(user_id: self.following_ids + [self.id])
   end
+  
+  has_many :favorites
+  has_many :myfavorites, through: :favorites, source: :post
+  
+  def favorite(post)
+    self.favorites.find_or_create_by(post_id: post.id)
+  end
+
+  def unfavorite(post)
+    fav = self.favorites.find_by(post_id: post.id)
+    fav.destroy if fav
+  end
+
+  def myfavorites?(post)
+    self.myfavorites.include?(post)
+  end
 end

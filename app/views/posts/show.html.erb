@@ -11,6 +11,7 @@
       <p class=""><%= @post.content %></p>
       <p class=""><small class="text-muted"><%= @post.updated_at %></small></p>
       <div class="text-right mb-5">
+        <%= render 'favorites/favorite_button', post: @post %>
         <% if current_user == @post.user %>
           <%= link_to '編集', edit_post_path(@post), class: 'btn btn-outline-dark btn-sm' %>
           <%= link_to "削除", @post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-outline-dark btn-sm' %>
@@ -19,4 +20,5 @@
     </div>
   </div>
 </div>
+
 

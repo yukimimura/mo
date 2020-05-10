@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes, :search]
   
   def index
   end
@@ -38,6 +38,22 @@ class UsersController < ApplicationController
   def likes
     @user = User.find(params[:id])
     @myfavorites = @user.myfavorites.page(params[:page])
+  end
+  
+  def usersearch
+    if params[:name].present? 
+      @users = User.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+    else
+      @users = User.none.page(params[:page])
+    end
+  end
+  
+  def postsearch
+    if params[:title].present?
+      @posts = Post.where('title LIKE ?', "%#{params[:title]}%").page(params[:page])
+    else
+      @posts = Post.none.page(params[:page])
+    end
   end
 
   private

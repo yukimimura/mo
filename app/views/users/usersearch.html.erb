@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-8 offset-sm-2 border">
+    <ul class="nav nav-tabs nav-justified mb-5 mt-3">
+      <li class="nav-item"><a href="<%= usersearch_users_path %>" class="nav-link <%= 'active' if current_page?(usersearch_users_path) %>">ユーザー検索  <span class="badge badge-secondary"><%= @count_microposts %></span></a></li>
+      <li class="nav-item"><a href="<%= postsearch_users_path %>" class="nav-link <%= 'active' if current_page?(postsearch_users_path) %>">投稿検索  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
+    </ul>
+    
+    <form class="text-center mb-5">
+      <%= form_with(url: usersearch_users_path, method: :get, local: true) do |f| %>
+        <%= f.text_field :name %>
+        <%= f.submit '検索', class: 'btn btn-outline-dark btn-sm ' %>
+      <% end %>
+    </form>
+      
+    <div class="d-flex justify-content-center mb-3">
+      <%= render 'users', users: @users %>
+    </div>
+  </div>
+</div>
